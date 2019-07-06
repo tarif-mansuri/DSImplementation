@@ -1,8 +1,8 @@
 package com.tm.heap;
 
 public class MaxHeap {
-	public int[] heap;
-	public int size;
+	private int[] heap;
+	private int size;
 	private int capasity;
 
 	public MaxHeap(int capacity) {
@@ -51,6 +51,10 @@ public class MaxHeap {
 	}
 
 	private void insert(int element) {
+		if(size>= capasity) {
+			System.out.print("There is no space to insert");
+			return;
+		}
 		heap[++size] = element;
 		int pos = size;
 		while (heap[parent(pos)] < heap[pos]) {
@@ -59,7 +63,7 @@ public class MaxHeap {
 		}
 	}
 
-	private int getMax() {
+	private int getAndRemoveMax() {
 		int maxElement = heap[1];
 		heap[1] = heap[size--];
 		maxHeapify(1);
@@ -79,6 +83,7 @@ public class MaxHeap {
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
@@ -90,8 +95,10 @@ public class MaxHeap {
 		maxHeap.insert(70);
 		maxHeap.insert(80);
 		maxHeap.print();
+		maxHeap.getAndRemoveMax();
+		maxHeap.print();
 		System.out.println();
-		for (int i = 0; i <= maxHeap.size; i++)
+		for (int i = 1; i <= maxHeap.size; i++)
 			System.out.print(" " + maxHeap.heap[i]);
 	}
 
